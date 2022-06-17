@@ -68,12 +68,10 @@ public class GenericLinkedList<T> {
 
         if(early) {
             for(int i = 0; i < index; i++) {
-                System.out.println("Iterate forward");
                 curr = curr.next;
             }
         } else {
             for(int j = size; j > index; j--) {
-                System.out.println("Iterate backward");
                 curr = curr.prev;
             }
         }
@@ -91,6 +89,33 @@ public class GenericLinkedList<T> {
         }
 
         return index;
+    }
+
+    public boolean contains(T obj) {
+        if(obj == null || size == 0) {
+            return false;
+        }
+
+        Node<T> start = head;
+        Node<T> end = tail;
+
+        int iters = 0;
+        while(true) {
+            iters++;
+            if(start.data.equals(obj) || end.data.equals(obj)) {
+                System.out.println("Times iterated: " + iters);
+                return true;
+            }
+
+            if(start.equals(end) || start.equals(end.next)) {
+                System.out.println("Times iterated: " + iters);
+                break;
+            }
+            start = start.next;
+            end = end.prev;
+        }
+
+        return false;
     }
 
     public int size() {

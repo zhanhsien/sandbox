@@ -1,5 +1,7 @@
 import collections.list.GenericLinkedList;
-import collections.list.LinkedList;
+
+import java.util.LinkedList;
+//import collections.list.LinkedList;
 
 public class Sandbox {
     /*
@@ -52,7 +54,8 @@ public class Sandbox {
         list.add("13");
 
         try {
-            System.out.println("Index: " + list.findFirstIndexOf("Anything"));
+//            System.out.println("Index: " + list.findFirstIndexOf("Anything"));
+            System.out.println("contains: " + list.contains("12"));
             System.out.println("getIndex: " + list.get(10));
         } catch (Exception e) {
             e.printStackTrace();
