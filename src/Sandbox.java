@@ -1,3 +1,4 @@
+import collections.list.GenericLinkedList;
 import collections.list.LinkedList;
 
 public class Sandbox {
@@ -11,24 +12,48 @@ public class Sandbox {
      */
 
     public static void main(String[] args) {
-        LinkedList list = new LinkedList();
+//        LinkedList list = new LinkedList();
+//
+//        list.add(0);
+//        list.add(1);
+//        list.add(2);
+//        list.add(3);
+//        list.add(4);
+//        list.add(5);
+//        list.add(6);
+//        list.add(7);
+//        list.add(8);
+//        list.add(9);
+//        list.add(10);
+//        list.add(11);
+//        list.add(12);
+//
+//        try {
+//            System.out.println("Index: " + list.findFirstIndexOf(6));
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//        list.print();
 
-        list.add(0);
-        list.add(1);
-        list.add(2);
-        list.add(3);
-        list.add(4);
-        list.add(5);
-        list.add(6);
-        list.add(7);
-        list.add(8);
-        list.add(9);
-        list.add(10);
-        list.add(11);
-        list.add(12);
+        GenericLinkedList<String> list = new GenericLinkedList<>();
+        list.add("1");
+        list.add("2");
+        list.add("3");
+        list.add("4");
+        list.add("5");
+        list.add("6");
+        list.add("7");
+        list.add("8");
+        list.add("9");
+        list.add("10");
+        list.add("11");
+        list.add("12");
+        list.add("13");
 
         try {
-            System.out.println("Index: " + list.findFirstIndexOf(6));
+            System.out.println("Index: " + list.findFirstIndexOf("Anything"));
+            System.out.println("getIndex: " + list.get(10));
         } catch (Exception e) {
             e.printStackTrace();
         }
