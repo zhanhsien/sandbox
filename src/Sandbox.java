@@ -26,7 +26,6 @@ public class Sandbox {
         list.add(10);
         list.add(11);
         list.add(12);
-//        list.print();
 
         LinkedList<String> list2 = new LinkedList<>();
 //
@@ -34,23 +33,20 @@ public class Sandbox {
 //        list2.add("dude");
 
 //        System.out.println(list.size());
-       System.out.println(list.get(10));
-        System.out.println(list.size());
+        list.get(8);
 
 
-//
-//
-//        try {
-//            System.out.println("Index: " + list.findFirstIndexOf(5));
-//        } catch (Exception e) {
-////            e.printStackTrace();
-//        }
+        try {
+            System.out.println("Index: " + list.indexOf(6));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 //
 
 //        REMOVING A SPECIFIC ENTRY
 //        HAD TO MAKE REMOME/REM OF TYPE T AND PASS T DATA AS A PARAM LIKE IN GET
 //        list2.remove("Brandon");
-
+        list2.print();
     }
 }
