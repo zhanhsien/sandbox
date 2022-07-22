@@ -40,21 +40,6 @@ public class LinkedList<T> {
 //        head = newNode;
 //        head.next = last;
     }
-//
-//    public T remove(T data) {
-//        if(head == null) {
-//            throw new RuntimeException("There's nothing to remove");
-//        }
-//
-//    }
-
-//    public T getFirst(T data) {
-//        Node<T> curr = head;
-//        while (curr != tail){
-//
-//        }
-//
-//    }
 
     public T get(int index) {
         if(index < 0 || index > size) {
@@ -66,10 +51,7 @@ public class LinkedList<T> {
         }
 
 //        condition ? execute 1 : execute 2
-         boolean headfirst = index<=(size/2);
-
-
-
+        boolean headfirst = index<=(size/2);
         Node<T> curr = headfirst ? head : tail ;
 
         if (headfirst){
@@ -77,9 +59,9 @@ public class LinkedList<T> {
             curr = curr.next;
         }}
         else {
-            for (int i = size; i >= index; i--) {
-                System.out.println("I is :" + i);
-                System.out.println(curr.data + "data");
+            for (int i = (size); i >= index; i--) {
+//                System.out.println("I is :" + i);
+//                System.out.println(curr.data + "data");
                 curr = curr.prev;
 
             }
@@ -89,10 +71,13 @@ public class LinkedList<T> {
     }
 
     public int findFirstIndexOf(T find) {
-        int index = -1;
+        int index = 0;
         for(int i = 0; i < size; i++) {
+           System.out.println("I is :" + i);
             if(get(i).equals(find)) {
+                System.out.println("find is: " + find + " I is : " + i);
                 index = i;
+//                return index;
             }
         }
 
@@ -116,7 +101,7 @@ public class LinkedList<T> {
 
         Node<T> curr = head;
         while(curr != null) {
-            System.out.print(curr.data + " ");
+            System.out.println(curr.data + " ");
             curr = curr.next;
         }
     }
