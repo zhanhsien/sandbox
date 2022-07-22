@@ -71,7 +71,7 @@ public class GenericLinkedList<T> {
                 curr = curr.next;
             }
         } else {
-            for(int j = size; j > index; j--) {
+            for(int j = size - 1; j > index; j--) {
                 curr = curr.prev;
             }
         }
