@@ -77,7 +77,7 @@ public class LinkedList<T> {
             curr = curr.next;
         }}
         else {
-            for (int i = size; i >= index; i--) {
+            for (int i = size-1; i > index; i--) {
                 System.out.println("I is :" + i);
                 System.out.println(curr.data + "data");
                 curr = curr.prev;
