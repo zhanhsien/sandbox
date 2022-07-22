@@ -37,7 +37,7 @@ public class Sandbox {
 
 
         try {
-            System.out.println("Index: " + list.findFirstIndexOf(6));
+            System.out.println("Index: " + list.indexOf(6));
         } catch (Exception e) {
             e.printStackTrace();
         }
