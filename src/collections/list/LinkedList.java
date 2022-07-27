@@ -38,12 +38,30 @@ public class LinkedList<T> {
     }
 
     /**
-     * Inserts a node at the designated index
+     * Inserts a node before the designated index
      * @param data - contents of the node
      * @param index - index of the node
      */
     public void insert(T data, int index) {
-        //TODO: Unimplemented
+
+        Node<T> currentNode = search(index); // Current node is index 1
+        Node<T> prevNode = currentNode.prev; // Prev node is index 0\
+
+        // Severing links to both nodes by setting the previous and next references to null -> REDUNDANT
+        prevNode.next = null;
+        currentNode.prev = null;
+
+        //Creating new node for our data to be stored in
+        Node<T> insertedNode = new Node<>(data);
+
+        //linking old nodes to new node
+        prevNode.next = insertedNode;
+        currentNode.prev = insertedNode;
+
+        //linking new node back to the old ones
+        insertedNode.next = currentNode;
+        insertedNode.prev = prevNode;
+
     }
 
     /**
@@ -52,7 +70,8 @@ public class LinkedList<T> {
      * @param index - index of the node
      */
     public void set(T data, int index) {
-        //TODO: Unimplemented
+
+        search(index).data = data;
     }
 
     /**
@@ -70,24 +89,40 @@ public class LinkedList<T> {
      * Removes the designated index from the list
      * @param index - index of the node
      */
-    public void remove(int index) {
+    public T remove(int index) {
         if(head == null) {
             throw new RuntimeException("There's nothing to remove");
         }
-        //TODO: Unimplemented
+
+        Node<T> removedNode = search(index);
+
+//        store removedNode.prev and removedNode.next
+//        cut ties to the removed node
+//        establish new connections between the prev and next nodes
+
+        Node<T> previousNode = removedNode.prev;
+        Node<T> nextNode = removedNode.next;
+
+        removedNode.prev=null;
+        removedNode.next=null;
+
+        previousNode.next = nextNode;
+        nextNode.prev = previousNode;
+
+
+//        LEFT OFF HERE
+        
+
+        return blah;
     }
 
-    /**
+   /**
      * Retrieves the first item of the list
      * @return contents of the node
      */
     public T peek() {
-        Node<T> curr = head;
-//        while (curr != tail){
-//
-//        }
-        //TODO: Unimplemented
-        return null;
+
+      return head == null ? null : head.data;
     }
 
     /**
@@ -95,8 +130,9 @@ public class LinkedList<T> {
      * @return contents of the node
      */
     public T pop() {
-        //TODO: Unimplemented
-        return null;
+
+        return remove(0);
+
     }
 
     /**
@@ -104,17 +140,24 @@ public class LinkedList<T> {
      * @param data - contents of the node
      */
     public void push(T data) {
-        //TODO: Unimplemented
-    }
 
-    public T get(int index) {
-        if(index < 0 || index > size) {
-            throw new IndexOutOfBoundsException("You're out of bounds");
-        }
+        Node<T> newNode = new Node<>(data);
 
         if(head == null) {
-            throw new RuntimeException("There's nothing to get");
+            head = newNode;
+            tail = newNode;
+            size++;
+            return;
         }
+
+        newNode.next = head;
+        head.prev = newNode;
+        head = newNode;
+        size++;
+
+    }
+
+    public Node<T> search(int index) {
 
         boolean headfirst = index <= (size / 2);
         Node<T> curr = headfirst ? head : tail ;
@@ -129,7 +172,20 @@ public class LinkedList<T> {
             }
         }
 
-        return curr.data;
+        return curr;
+    }
+
+    public T get(int index) {
+        if(index < 0 || index > size) {
+            throw new IndexOutOfBoundsException("You're out of bounds");
+        }
+
+        if(head == null) {
+            throw new RuntimeException("There's nothing to get");
+        }
+
+       return search(index).data;
+
     }
 
     public int indexOf(T find) {
