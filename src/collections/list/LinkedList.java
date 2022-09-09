@@ -112,14 +112,17 @@ public class LinkedList<T extends Comparable<T>> {
 
         if (removedNode != head) {
             previousNode.next = nextNode;
+        } else {
+            head = nextNode;
         }
+
         if (removedNode != tail) {
             nextNode.prev = previousNode;
+        } else {
+            tail = previousNode;
         }
 
         size--;
-//        LEFT OFF HERE
-        
 
         return removedNode.data;
     }
@@ -166,18 +169,6 @@ public class LinkedList<T extends Comparable<T>> {
     }
 
     public Node<T> search(int index) {
-        if(head == null) {
-            System.out.println("list is empty");
-        }
-        System.out.print("For the hood    ");
-        Node<T> durr = head;
-        while(durr != null) {
-            System.out.print(durr.data + " ");
-            durr = durr.next;
-        }
-        System.out.println("");
-
-
         boolean headfirst = index <= (size / 2);
         Node<T> curr = headfirst ? head : tail ;
 
@@ -229,8 +220,8 @@ public class LinkedList<T extends Comparable<T>> {
      */
     public boolean contains(T data) {
         if (head == null) {
-        }
             System.out.println("List contains no entries");
+        }
 
         return (indexOf(data) > -1);
     }
@@ -241,9 +232,6 @@ public class LinkedList<T extends Comparable<T>> {
      * Want to start at head node, empty that node, progress to next node, empty that node, repeat until reaching tail node.
      */
     public void clear() {
-
-//      Node<T> curr = head;
-
       while (head != tail && head.data != null) {
           head.data = null;
           head = head.next;
@@ -293,6 +281,8 @@ public class LinkedList<T extends Comparable<T>> {
         System.out.println("");
     }
 
+    int count = 0;
+
     public LinkedList<T> sort() {
         /*
         * Create New list
@@ -309,30 +299,23 @@ public class LinkedList<T extends Comparable<T>> {
         *           * */
         LinkedList<T> newList = new LinkedList<>();
         LinkedList<T> clonedList = clone();
-        clonedList.print();
 
         while (clonedList.size > 0){
-            T lowestItem = null;
-            lowestItem = findLowest(clonedList, lowestItem);
+            T lowestItem = findLowest(clonedList);
             newList.add(lowestItem);
             clonedList.remove(clonedList.indexOf(lowestItem));
-            System.out.print("NEW LIST   ");
-            newList.print();
-            System.out.print("Cloned LIST   ");
-            clonedList.print();
         }
 
         return newList;
     }
 
-    public T findLowest(LinkedList<T> templist, T lowestItem ){
-        System.out.print("temp LIST   ");
-        templist.print();
+    public T findLowest(LinkedList<T> templist){
+        T lowestItem = null;
         for(int i = 0; i <= templist.size; i++ ){
+            count++;
             if(lowestItem == null || lowestItem.compareTo(templist.get(i)) > 0){
                 lowestItem = templist.get(i);
-
-        }
+            }
         }
         return lowestItem;
     }
