@@ -1,6 +1,9 @@
 package collections.list;
 
-public class LinkedList<T> {
+import javax.xml.crypto.Data;
+import java.security.PublicKey;
+
+public class LinkedList<T extends Comparable<T>> {
     Node<T> head;
     Node<T> tail;
     int size;
@@ -82,7 +85,8 @@ public class LinkedList<T> {
         if(head == null) {
             throw new RuntimeException("There's nothing to remove");
         }
-        //TODO: Unimplemented
+
+        remove(indexOf(data));
     }
 
     /**
@@ -93,8 +97,8 @@ public class LinkedList<T> {
         if(head == null) {
             throw new RuntimeException("There's nothing to remove");
         }
-
         Node<T> removedNode = search(index);
+
 
 //        store removedNode.prev and removedNode.next
 //        cut ties to the removed node
@@ -106,14 +110,18 @@ public class LinkedList<T> {
         removedNode.prev=null;
         removedNode.next=null;
 
-        previousNode.next = nextNode;
-        nextNode.prev = previousNode;
+        if (removedNode != head) {
+            previousNode.next = nextNode;
+        }
+        if (removedNode != tail) {
+            nextNode.prev = previousNode;
+        }
 
-
+        size--;
 //        LEFT OFF HERE
         
 
-        return blah;
+        return removedNode.data;
     }
 
    /**
@@ -158,6 +166,17 @@ public class LinkedList<T> {
     }
 
     public Node<T> search(int index) {
+        if(head == null) {
+            System.out.println("list is empty");
+        }
+        System.out.print("For the hood    ");
+        Node<T> durr = head;
+        while(durr != null) {
+            System.out.print(durr.data + " ");
+            durr = durr.next;
+        }
+        System.out.println("");
+
 
         boolean headfirst = index <= (size / 2);
         Node<T> curr = headfirst ? head : tail ;
@@ -212,23 +231,53 @@ public class LinkedList<T> {
         if (head == null) {
         }
             System.out.println("List contains no entries");
-        //TODO: Unimplemented
-        return false;
+
+        return (indexOf(data) > -1);
     }
 
     /**
      * Empties the contents of the list
+     *
+     * Want to start at head node, empty that node, progress to next node, empty that node, repeat until reaching tail node.
      */
     public void clear() {
-        //TODO: Unimplemented
+
+//      Node<T> curr = head;
+
+      while (head != tail && head.data != null) {
+          head.data = null;
+          head = head.next;
+          head.prev.next = null;
+          head.prev = null;
+      }
+
+      if (head == tail && head.data != null) {
+          head.data = null;
+      }
     }
 
     /**
      * Copies the contents of the list
+     *
+     * Create new list, go node by node and set contents of new list to that of the other list
+     *
      */
     public LinkedList<T> clone() {
-        //TODO: Unimplemented
-        return null;
+
+        LinkedList<T> listClone = new LinkedList<>();
+        Node<T> currClone = head;
+
+        while (currClone != tail && currClone.data != null) {
+
+            listClone.add(currClone.data);
+            currClone = currClone.next;
+        }
+
+        if (currClone == tail && currClone.data != null) {
+            listClone.add(currClone.data);
+        }
+
+        return listClone;
     }
 
     public void print() {
@@ -241,5 +290,51 @@ public class LinkedList<T> {
             System.out.print(curr.data + " ");
             curr = curr.next;
         }
+        System.out.println("");
     }
+
+    public LinkedList<T> sort() {
+        /*
+        * Create New list
+        * create lowestItem var
+        * Clone OG list
+        *
+        * Create a for loop for i=<size
+        * assign head to lowestItem var
+        * go to next, if lower, reassign gender, if not, continue to next
+        * iterate through until tail
+        * if tail is not lowest, add lowestItem var to new list
+        * remove lowest item from OG list
+        *
+        *           * */
+        LinkedList<T> newList = new LinkedList<>();
+        LinkedList<T> clonedList = clone();
+        clonedList.print();
+
+        while (clonedList.size > 0){
+            T lowestItem = null;
+            lowestItem = findLowest(clonedList, lowestItem);
+            newList.add(lowestItem);
+            clonedList.remove(clonedList.indexOf(lowestItem));
+            System.out.print("NEW LIST   ");
+            newList.print();
+            System.out.print("Cloned LIST   ");
+            clonedList.print();
+        }
+
+        return newList;
+    }
+
+    public T findLowest(LinkedList<T> templist, T lowestItem ){
+        System.out.print("temp LIST   ");
+        templist.print();
+        for(int i = 0; i <= templist.size; i++ ){
+            if(lowestItem == null || lowestItem.compareTo(templist.get(i)) > 0){
+                lowestItem = templist.get(i);
+
+        }
+        }
+        return lowestItem;
+    }
+
 }
