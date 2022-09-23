@@ -281,8 +281,6 @@ public class LinkedList<T extends Comparable<T>> {
         System.out.println("");
     }
 
-    int count = 0;
-
     public LinkedList<T> sort() {
         /*
         * Create New list
@@ -311,6 +309,7 @@ public class LinkedList<T extends Comparable<T>> {
 
     public T findLowest(LinkedList<T> templist){
         T lowestItem = null;
+        int count = 0;
         for(int i = 0; i <= templist.size; i++ ){
             count++;
             if(lowestItem == null || lowestItem.compareTo(templist.get(i)) > 0){
@@ -320,4 +319,61 @@ public class LinkedList<T extends Comparable<T>> {
         return lowestItem;
     }
 
-}
+    //Recursive
+    private void quickSort(LinkedList<T> list, int startIndex, int endIndex) {
+
+        if (startIndex < endIndex) {
+
+
+            int indexOfPivotPoint = partition(list, startIndex, endIndex);
+
+            quickSort(list, startIndex, (indexOfPivotPoint-1));
+
+            quickSort(list, (indexOfPivotPoint+1), endIndex);
+
+
+
+            return;
+        }
+
+
+    }
+
+    public void quickSort(){
+        quickSort(this,0,(size-1));
+    }
+
+    /**
+     * Want to get everything to the left of the pivot to be smaller and everything to the right of the pivot to be larger
+     *
+     */
+    public int partition(LinkedList<T> someList, int startIndex, int endIndex){
+
+        T pivotPoint = someList.get(endIndex);
+        int swappedIndex = (endIndex);
+
+        for (int i = endIndex-1; i > 0; i--){
+           T currentEntry = someList.get(i);
+           if (currentEntry.compareTo(pivotPoint) > 0){
+               swappedIndex--;
+               swapIt(someList,swappedIndex, i );
+           }
+        }
+
+        swapIt(someList, endIndex, swappedIndex);
+
+        return 0;
+    }
+
+    private void swapIt(LinkedList<T> listToSwap,int swapIndex, int currentIndex){
+        if (currentIndex != swapIndex){
+
+            T tempData = listToSwap.get(swapIndex);
+        T currentData = listToSwap.get(currentIndex);
+        listToSwap.set(currentData, swapIndex);
+        listToSwap.set(tempData, currentIndex);
+    }
+
+    }
+    }
+

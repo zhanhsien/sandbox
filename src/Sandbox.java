@@ -27,9 +27,11 @@ public class Sandbox {
 
 
 //        list.print();
-//        list.clone().print();
 
-        list.sort();
+
+        list.quickSort();
+        list.print();
+
 
 
     }
